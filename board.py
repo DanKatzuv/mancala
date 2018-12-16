@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.config import Config
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.image import Image
 
@@ -20,4 +21,5 @@ class Mancala(App):
 
 
 if __name__ == '__main__':
+    Config.set('graphics', 'window_state', 'maximized')
     Mancala().run()
