@@ -21,5 +21,5 @@ class Mancala(App):
 
 
 if __name__ == '__main__':
-    Config.set('graphics', 'window_state', 'maximized')
+    Config.set('graphics', 'window_state', 'maximized')  # Configure the board to open in full screen
     Mancala().run()
