@@ -22,4 +22,5 @@ class Mancala(App):
 
 if __name__ == '__main__':
     Config.set('graphics', 'window_state', 'maximized')  # Configure the board to open in full screen
+    Config.set('kivy', 'exit_on_escape', '1')  # Make the game close if the Esc key in pressed
     Mancala().run()
