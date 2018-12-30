@@ -1,17 +1,18 @@
 from kivy.app import App
 from kivy.config import Config
-from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.behaviors import ButtonBehavior
 from kivy.uix.image import Image
 
 
-class Board(FloatLayout):
+class Pit(ButtonBehavior, Image):
+class Board(GridLayout):
     """Class representing the board, with the graphics."""
 
     def __init__(self):
-        super(Board, self).__init__(size=(1600, 200))
-        self.up_store = Image(source='images\\store.png', pos_hint={'x': 0, 'center_y': 0.5}, size_hint=(0.125, 1),
-                              allow_strech=True, keep_ratio=False)
-        self.up_store.allow_stretch = True
+        self.rows = 2
+        self.cols = 7
+        super(Board, self).__init__()
+
         self.add_widget(self.up_store)
 
 
