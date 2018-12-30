@@ -1,10 +1,28 @@
 from kivy.app import App
 from kivy.config import Config
 from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import Image
 
 
 class Pit(ButtonBehavior, Image):
+    def __init__(self, row, column, source='images\\pit.png'):
+        """
+        Instantiate a pit.
+        :param row: line of the pit
+        :type row: int
+        :param column: column of the pit
+        :type column: int
+        """
+        super(Pit, self).__init__()
+        self.row = row
+        self.column = column
+        self.source = source
+
+    def on_press(self):
+        raise NotImplementedError
+
+
 class Board(GridLayout):
     """Class representing the board, with the graphics."""
 
