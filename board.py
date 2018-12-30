@@ -31,7 +31,25 @@ class Board(GridLayout):
         self.cols = 7
         super(Board, self).__init__()
 
+        self._insert_pits()
+
+    def _insert_pits(self):
+        """Insert the stores and pits in the board."""
+        self.up_store = Pit(0, 0, 'images\\store.png')
         self.add_widget(self.up_store)
+
+        self.up_pits = []
+        self.down_pits = []
+        for column in xrange(1, self.cols):
+            self.up_pits.append(Pit(0, column))
+        for column in xrange(self.cols - 1):
+            self.down_pits.append(Pit(1, column))
+
+        for pit in self.up_pits + self.down_pits:
+            self.add_widget(pit)
+
+        self.down_store = Pit(1, self.cols, 'images\\store.png')
+        self.add_widget(self.down_store)
 
 
 class Mancala(App):
