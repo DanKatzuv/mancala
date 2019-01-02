@@ -6,18 +6,21 @@ from kivy.uix.image import Image
 
 
 class Pit(ButtonBehavior, Image):
-    def __init__(self, row, column, source='images\\pit.png'):
+    def __init__(self, row, column, board, source='images\\pit.png'):
         """
         Instantiate a pit.
         :param row: line of the pit
         :type row: int
         :param column: column of the pit
         :type column: int
+        :param board: the board which the pit is in
+        :type board: Board
         """
         super(Pit, self).__init__()
         self.row = row
         self.column = column
         self.source = source
+        self.board = board
         self.amount = 4
 
     def on_press(self):
@@ -36,21 +39,37 @@ class Board(GridLayout):
 
     def _insert_pits(self):
         """Insert the stores and pits in the board."""
-        self.up_store = Pit(0, 0, 'images\\store.png')
+        self.up_store = Pit(0, 0, self, 'images\\store.png')
         self.add_widget(self.up_store)
 
         self.up_pits = []
         self.down_pits = []
         for column in xrange(1, self.cols):
-            self.up_pits.append(Pit(0, column))
+            self.up_pits.append(Pit(0, column, self))
         for column in xrange(self.cols - 1):
-            self.down_pits.append(Pit(1, column))
+            self.down_pits.append(Pit(1, column, self))
 
         for pit in self.up_pits + self.down_pits:
             self.add_widget(pit)
 
-        self.down_store = Pit(1, self.cols, 'images\\store.png')
+        self.down_store = Pit(1, self.cols, self, 'images\\store.png')
         self.add_widget(self.down_store)
+
+    def _has_game_ended(self):
+        """
+        Return whether the game has ended. The game ends when all pits of one player are empty.
+        :return: whether the game has ended
+        :rtype: bool
+        """
+        for pit in self.up_pits:
+            if pit.amount != 0:
+                break
+        else:
+            return True
+        for pit in self.down_pits:
+            if pit.amount != 0:
+                return False
+        return True
 
 
 class Mancala(App):
