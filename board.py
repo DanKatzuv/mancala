@@ -18,6 +18,7 @@ class Pit(ButtonBehavior, Image):
         self.row = row
         self.column = column
         self.source = source
+        self.amount = 4
 
     def on_press(self):
         raise NotImplementedError
